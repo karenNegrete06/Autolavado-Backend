@@ -1,0 +1,1 @@
+Carpeta llamada schemas, se agrega un readme para no perder la carpeta
