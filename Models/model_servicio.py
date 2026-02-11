@@ -7,7 +7,7 @@ Modelo Servicio para la base de datos.
 
 from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime, ForeignKey
 from sqlalchemy.sql import func
-from config.db import Base
+from Config.db import Base
 
 
 class Servicio(Base):
@@ -21,7 +21,7 @@ class Servicio(Base):
     se_descripcion = Column(String(850), nullable=True)
     se_precio = Column(Float, nullable=False)
     se_estatus = Column(Boolean, default=True)
-
+    se_duracion_minutos=Column(Integer)
     us_id = Column(Integer, ForeignKey("tbb_usuario.id"), nullable=False)
 
     fecha_registro = Column(DateTime, default=func.now)

@@ -13,6 +13,8 @@ class RolBase(BaseModel):
     """
     nombre: str
     estatus: bool
+    fecha_registro: datetime
+    fecha_modificacion: datetime
 
 
 class RolCreate(RolBase):
@@ -31,9 +33,7 @@ class RolResponse(RolBase):
     """
     Esquema de respuesta de rol.
     """
-    id: int
-    fecha_registro: datetime
-    fecha_modificacion: Optional[datetime]
+    
 
     class Config:
         '''

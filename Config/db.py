@@ -6,7 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 # Se recomienda usar el driver explícito (mysql+pymysql)
-SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:1234@127.0.0.1:3307/autolavadoDB"
+SQLALCHEMY_DATABASE_URL = "mysql+pymysql://root:1234@localhost:3307/autolavadodb"
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 

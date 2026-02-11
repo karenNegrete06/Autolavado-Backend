@@ -7,7 +7,7 @@ Modelo Usuario para la base de datos.
 
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
 from sqlalchemy.sql import func
-from config.db import Base
+from Config.db import Base
 
 
 class User(Base):
