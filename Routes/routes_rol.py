@@ -5,7 +5,7 @@ from typing import List
 
 rol=APIRouter()
 
-Models.model_rols.Base.metadata.create_all(bind=Config.db.engine)
+
 
 def get_db():
     db = Config.db.SessionLocal()

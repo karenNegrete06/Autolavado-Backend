@@ -6,19 +6,22 @@ Modelo ServicioVehiculo para la base de datos.
 # pylint: disable=too-few-public-methods
 
 from sqlalchemy import (
-    Column,
     Integer,
     Boolean,
     ForeignKey,
     DateTime,
     Float,
     Time,
+    Column,
+    Enum as SQLEnum
 )
 from sqlalchemy.sql import func
 from Config.db import Base
-from enum import Enum 
+from enum import Enum as PyEnum
+import Models.model_servicio
 
-class Solicitud():
+
+class Solicitud(PyEnum):
     Programado="Programada"
     Proceso="Proceso"
     Realizada="Realizada"
@@ -40,7 +43,9 @@ class ServicioVehiculo(Base):
 
     as_fecha = Column(DateTime, default=func.now())
     as_hora = Column(Time, default=func.now())
-    as_estatus = Column(Enum(Solicitud), default=Solicitud.Programada)
+    as_estatus = Column(SQLEnum(Solicitud, name="solicitud_enum"), default=Solicitud.Programado)
     as_estado = Column(Boolean)
     fecha_registro = Column(DateTime, default=func.now())
     fecha_modificacion = Column(DateTime, onupdate=func.now())
+
+

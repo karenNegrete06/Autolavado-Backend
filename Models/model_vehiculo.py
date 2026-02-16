@@ -23,4 +23,4 @@ class Vehiculo(Base):
     au_usuario_id=Column(Integer, ForeignKey("tbb_usuario.id"))
     
 
-    cl_id = Column(Integer, ForeignKey("tbb_usuario.cl_id"), nullable=False)
+    cl_id = Column(Integer, ForeignKey("tbb_usuario.id"), nullable=False)

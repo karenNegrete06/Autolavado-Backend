@@ -4,7 +4,7 @@ import Config.db, Models.model_servicio, Schemas.schema_servicio, Crud.crud_serv
 from typing import List
 
 servicio=APIRouter()
-Models.model_servicio.Base.metadata.create_all(bind=Config.db.engine)
+
 
 def get_db():
     db = Config.db.SessionLocal()
