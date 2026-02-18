@@ -22,7 +22,7 @@ import Models.model_servicio
 
 
 class Solicitud(PyEnum):
-    Programado="Programada"
+    Programado="Programado"
     Proceso="Proceso"
     Realizada="Realizada"
     Cancelada="Cancelada"
