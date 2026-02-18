@@ -8,7 +8,7 @@ Modelo Rol para la base de datos.
 from sqlalchemy import Column, Integer, String, Boolean, DateTime
 from sqlalchemy.sql import func
 from Config.db import Base
-
+from sqlalchemy.orm import relationship
 
 class Rol(Base):
     """
@@ -21,3 +21,5 @@ class Rol(Base):
     estatus = Column(Boolean, default=True)
     fecha_registro = Column(DateTime, default=func.now)
     fecha_modificacion = Column(DateTime, onupdate=func.now)
+    
+    usuarios = relationship("Usuario", back_populates="rols")

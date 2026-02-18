@@ -8,7 +8,7 @@ Modelo Servicio para la base de datos.
 from sqlalchemy import Column, Integer, String, Float, Boolean, DateTime, ForeignKey
 from sqlalchemy.sql import func
 from Config.db import Base
-
+from sqlalchemy.orm import relationship
 
 class Servicio(Base):
     """
@@ -26,3 +26,5 @@ class Servicio(Base):
 
     fecha_registro = Column(DateTime, default=func.now)
     fecha_modificacion = Column(DateTime, onupdate=func.now)
+    
+    servicios_vehiculo = relationship("ServicioVehiculo", back_populates="servicio")

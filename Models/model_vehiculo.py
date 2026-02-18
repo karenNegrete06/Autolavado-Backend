@@ -1,7 +1,7 @@
 """
 Modelo Vehiculo para la base de datos.
 """
-
+from sqlalchemy.orm import relationship
 # pylint: disable=import-error
 # pylint: disable=too-few-public-methods
 
@@ -21,6 +21,6 @@ class Vehiculo(Base):
     au_color = Column(String(45), nullable=True)
     au_tipo = Column(String(45), nullable=True)
     au_usuario_id=Column(Integer, ForeignKey("tbb_usuario.id"))
-    
-
     cl_id = Column(Integer, ForeignKey("tbb_usuario.id"), nullable=False)
+    usuario = relationship("User", back_populates="vehiculos")
+    servicios_vehiculo = relationship("ServicioVehiculo", back_populates="vehiculo")

@@ -19,7 +19,7 @@ from sqlalchemy.sql import func
 from Config.db import Base
 from enum import Enum as PyEnum
 import Models.model_servicio
-
+from sqlalchemy.orm import relationship
 
 class Solicitud(PyEnum):
     Programado="Programado"
@@ -47,5 +47,8 @@ class ServicioVehiculo(Base):
     as_estado = Column(Boolean)
     fecha_registro = Column(DateTime, default=func.now())
     fecha_modificacion = Column(DateTime, onupdate=func.now())
-
-
+    
+    cajero = relationship("Usuario", back_populates="servicios_cajero", foreign_keys=[cajero_id])
+    operativo = relationship("Usuario", back_populates="servicios_operativo", foreign_keys=[operativo_id])
+    servicio = relationship("Servicio", back_populates="servicios_vehiculo")
+    vehiculo = relationship("Vehiculo", back_populates="servicios_vehiculo")

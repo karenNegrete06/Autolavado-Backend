@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 import Config.db, Models.model_user, Schemas.schema_user, Crud.crud_user
 from typing import List
 
+
 user=APIRouter()
 
 def get_db():
