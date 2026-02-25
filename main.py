@@ -25,7 +25,7 @@ app = FastAPI(
     description="Sistema de creacion y almacenamiento de informacion y ventas en un autolavado"
 )
 
-# 🔥 Crear tablas UNA SOLA VEZ
+
 Base.metadata.create_all(bind=engine)
 
     
