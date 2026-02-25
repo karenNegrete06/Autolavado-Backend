@@ -1,5 +1,4 @@
-from fastapi import FastAPI
-from Config.db import Base, engine
+
 
 # IMPORTAR TODOS LOS MODELOS (ANTES de create_all)
 import Models.model_rols
@@ -7,6 +6,12 @@ import Models.model_user
 import Models.model_servicio
 import Models.model_servicio_vehiculo
 import Models.model_vehiculo
+
+from fastapi import Depends, FastAPI
+from Config.db import Base, engine
+
+# IMPORTAR TODOS LOS MODELOS (ANTES de create_all)
+from Config.security import get_current_user
 
 from Routes.routes_rol import rol
 from Routes.routes_user import user
@@ -23,13 +28,21 @@ app = FastAPI(
 # 🔥 Crear tablas UNA SOLA VEZ
 Base.metadata.create_all(bind=engine)
 
+    
+
+
+
+app = FastAPI(
+    title="Sistema de control de autolavado",
+    description="Sistema de creacion y almacenamiento de informacion y ventas en un autolavado"
+)
+
 app.include_router(rol)
 app.include_router(user)
-app.include_router(servicio_vehiculo)
-app.include_router(servicio)
-app.include_router(vehiculo)
+app.include_router(vehiculo, dependencies=[Depends(get_current_user)])
+app.include_router(servicio, dependencies=[Depends(get_current_user)])
+app.include_router(servicio_vehiculo, dependencies=[Depends(get_current_user)])
 
-    
 
 
 

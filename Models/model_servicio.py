@@ -17,14 +17,12 @@ class Servicio(Base):
     __tablename__ = "tbc_servicio"
 
     se_id = Column(Integer, primary_key=True, index=True)
-    se_nombre = Column(String(80), nullable=False)
-    se_descripcion = Column(String(850), nullable=True)
-    se_precio = Column(Float, nullable=False)
-    se_estatus = Column(Boolean, default=True)
+    se_nombre = Column(String(80))
+    se_descripcion = Column(String(850))
+    se_precio = Column(Float)
+    se_estatus = Column(Boolean)
     se_duracion_minutos=Column(Integer)
-    us_id = Column(Integer, ForeignKey("tbb_usuario.id"), nullable=False)
-
-    fecha_registro = Column(DateTime, default=func.now)
-    fecha_modificacion = Column(DateTime, onupdate=func.now)
+    fecha_registro = Column(DateTime)
+    fecha_modificacion = Column(DateTime)
     
     servicios_vehiculo = relationship("ServicioVehiculo", back_populates="servicio")

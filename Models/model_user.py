@@ -17,21 +17,19 @@ class User(Base):
     __tablename__ = "tbb_usuario"
 
     id = Column(Integer, primary_key=True, index=True)
-    rol_id = Column(Integer, ForeignKey("tbc_roles.id"), nullable=False)
+    rol_id = Column(Integer, ForeignKey("tbc_roles.id"))
+    nombre = Column(String(60))
+    papellido = Column(String(60))
+    sapellido = Column(String(60))
+    password = Column(String(255))
 
-    nombre = Column(String(60), nullable=False)
-    papellido = Column(String(60), nullable=False)
-    sapellido = Column(String(60), nullable=True)
-    usuario = Column(String(60), nullable=False, unique=True)
-    password = Column(String(255), nullable=False)
+    direccion = Column(String(255))
+    telefono = Column(String(20))
+    correo = Column(String(100))
 
-    direccion = Column(String(255), nullable=True)
-    telefono = Column(String(20), nullable=True, unique=True)
-    correo = Column(String(100), nullable=True, unique=True)
-
-    estatus = Column(Boolean, default=True)
-    fecha_registro = Column(DateTime, default=func.now)
-    fecha_modificacion = Column(DateTime, onupdate=func.now)
+    estatus = Column(Boolean)
+    fecha_registro = Column(DateTime)
+    fecha_modificacion = Column(DateTime)
     
     rols = relationship("Rol", back_populates="usuarios")
     vehiculos = relationship("Vehiculo", back_populates="usuarios")

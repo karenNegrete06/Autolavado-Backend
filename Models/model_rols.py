@@ -17,9 +17,9 @@ class Rol(Base):
     __tablename__ = "tbc_roles"
 
     id = Column(Integer, primary_key=True, index=True)
-    nombre = Column(String(60), nullable=False, unique=True)
-    estatus = Column(Boolean, default=True)
-    fecha_registro = Column(DateTime, default=func.now)
-    fecha_modificacion = Column(DateTime, onupdate=func.now)
+    nombre = Column(String(60))
+    estatus = Column(Boolean)
+    fecha_registro = Column(DateTime)
+    fecha_modificacion = Column(DateTime)
     
     usuarios = relationship("Usuario", back_populates="rols")

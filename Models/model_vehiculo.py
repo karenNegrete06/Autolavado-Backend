@@ -16,11 +16,17 @@ class Vehiculo(Base):
     __tablename__ = "tbb_vehiculo"
 
     au_id = Column(Integer, primary_key=True, index=True)
-    au_modelo = Column(String(45), nullable=False)
-    au_matricula = Column(String(45), nullable=False, unique=True)
-    au_color = Column(String(45), nullable=True)
-    au_tipo = Column(String(45), nullable=True)
     au_usuario_id=Column(Integer, ForeignKey("tbb_usuario.id"))
-    cl_id = Column(Integer, ForeignKey("tbb_usuario.id"), nullable=False)
+    au_matricula = Column(String(45))
+    au_marca= Column(String(45))
+    au_modelo = Column(String(45))
+    au_anio = Column(Integer)
+    au_color = Column(String(45))
+    au_tipo = Column(String(45))
+    au_serie = Column(String(45))
+    au_estado = Column(String(45))
+    fecha_registro = Column(String(45))
+    fecha_modificacion = Column(String(45))
+
     usuario = relationship("User", back_populates="vehiculos")
     servicios_vehiculo = relationship("ServicioVehiculo", back_populates="vehiculo")

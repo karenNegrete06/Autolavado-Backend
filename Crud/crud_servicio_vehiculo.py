@@ -6,6 +6,9 @@ from sqlalchemy.orm import Session
 def get_servicio_vehiculo(db: Session, skip: int = 0, limit: int = 10):
     return db.query(ServicioVehiculo).offset(skip).limit(limit).all()
 
+def get_servicio_vehiculo_by_se_id(db: Session, se_id: int):
+    return db.query(ServicioVehiculo).filter(ServicioVehiculo.se_id == se_id).first()
+
 def get_servicio_vehiculo_by_id(db: Session, as_id: int):
     return db.query(ServicioVehiculo).filter(ServicioVehiculo.as_id == as_id).first()
 
@@ -29,27 +32,19 @@ def create_servicio_vehiculo(db: Session, servicio_vehiculo: Schemas.schema_serv
 
 def update_servicio_vehiculo(db: Session, as_id: int, servicio_vehiculo: Schemas.schema_servicio_vehiculo.ServicioVehiculoCreate):
     db_servicio_vehiculo = db.query(ServicioVehiculo).filter(ServicioVehiculo.as_id == as_id).first()
-    if db_servicio_vehiculo is None:
-        return None
-    db_servicio_vehiculo.au_id = servicio_vehiculo.au_id
-    db_servicio_vehiculo.cajero_id = servicio_vehiculo.cajero_id
-    db_servicio_vehiculo.operativo_id = servicio_vehiculo.operativo_id
-    db_servicio_vehiculo.se_id = servicio_vehiculo.se_id
-    db_servicio_vehiculo.as_fecha = servicio_vehiculo.as_fecha
-    db_servicio_vehiculo.as_hora = servicio_vehiculo.as_hora
-    db_servicio_vehiculo.as_estatus = servicio_vehiculo.as_estatus
-    db_servicio_vehiculo.as_estado = servicio_vehiculo.as_estado
-    db_servicio_vehiculo.fecha_modificacion = servicio_vehiculo.fecha_modificacion
-    db.commit()
+    if db_servicio_vehiculo:
+      for var, value in vars(servicio_vehiculo).items():
+          setattr(db_servicio_vehiculo, var, value) if value else None
+          db.add(db_servicio_vehiculo)
+          db.commit()
     db.refresh(db_servicio_vehiculo)
     return db_servicio_vehiculo
 
 def delete_servicio_vehiculo(db: Session, as_id: int):
     db_servicio_vehiculo = db.query(ServicioVehiculo).filter(ServicioVehiculo.as_id == as_id).first()
-    if db_servicio_vehiculo is None:
-        return None
-    db.delete(db_servicio_vehiculo)
-    db.commit()
+    if db_servicio_vehiculo:
+        db.delete(db_servicio_vehiculo)
+        db.commit()
     return db_servicio_vehiculo
 
 def get_servicio_vehiculo_by_au_id(db: Session, au_id: int):
@@ -60,7 +55,4 @@ def get_servicio_vehiculo_by_cajero_id(db: Session, cajero_id: int):
 
 def get_servicio_vehiculo_by_operativo_id(db: Session, operativo_id: int):
     return db.query(ServicioVehiculo).filter(ServicioVehiculo.operativo_id == operativo_id).first()
-
-def get_servicio_vehiculo_by_se_id(db: Session, se_id: int):
-    return db.query(ServicioVehiculo).filter(ServicioVehiculo.se_id == se_id).first()
 
